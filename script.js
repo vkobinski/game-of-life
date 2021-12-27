@@ -2,6 +2,8 @@ var canvas = document.getElementById('canvas');
 var stepButton = document.getElementById('step-button');
 var drawButton = document.getElementById('draw-button');
 var eraseButton = document.getElementById('erase-button');
+var fillButton = document.getElementById('fill-button');
+var clearButton = document.getElementById('clear-button');
 var mousePos = document.getElementById('mouse-pos');
 var mouseMode = document.getElementById('mouse-mode');
 var playPauseButton = document.getElementById('play-pause-button');
@@ -16,6 +18,7 @@ const height = 30;
 const squareSize = 20;
 
 playPauseButton.addEventListener('click', playPause);
+
 stepButton.addEventListener('click', step);
 drawButton.addEventListener('click', e => {
     draw = 1;
@@ -50,11 +53,30 @@ canvas.addEventListener('click', e => {
 })
 
 var board = Array(width).fill(0).map(() => Array(height).fill(0));
+createBoard();
 board[0][1] = 1;
 board[1][1] = 1;
 board[2][1] = 1;
 printBoard(board);
 refreshMouseMode();
+
+fillButton.addEventListener('click', createBoard)
+clearButton.addEventListener('click', (e) => {
+    board = Array(width).fill(0).map(() => Array(height).fill(0));
+    printBoard(board);
+})
+
+function createBoard(){
+    for(y = 0; y < board.length; y++){
+        for(x = 0; x < board.length; x++){
+            var random = Math.random() * (10 - 1) + 1;
+            if(random > 5){
+                board[y][x] = 1;
+            }
+        }    
+    }
+    printBoard(board);
+}
 
 function playPause(){
     if(play == 1){
