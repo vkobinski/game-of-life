@@ -38,6 +38,7 @@ canvas.addEventListener('mousemove', e => {
 })
 
 canvas.addEventListener('click', e => {
+    // TODOO(#1): Add Drag Mouse for Draw Mode
     x = e.offsetX/squareSize;
     y = e.offsetY/squareSize;
     x = parseInt(x);
@@ -46,7 +47,7 @@ canvas.addEventListener('click', e => {
     if(draw == 1){
         board[y][x] = 1;
     }
-    else{
+    else{ 
         board[y][x] = 0;
     }
     printBoard(board);
