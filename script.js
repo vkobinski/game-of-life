@@ -13,9 +13,9 @@ var draw = 1;
 var play = 0;
 var interval;
 
-const width = 30;
-const height = 30;
-const squareSize = 20;
+const WIDTH = 30;
+const HEIGHT = 30;
+const SQUARE_SIZE = 20;
 
 playPauseButton.addEventListener('click', playPause);
 
@@ -30,8 +30,8 @@ eraseButton.addEventListener('click', e => {
 })
 
 canvas.addEventListener('mousemove', e => {
-    x = e.offsetX/squareSize;
-    y = e.offsetY/squareSize;
+    x = e.offsetX/SQUARE_SIZE;
+    y = e.offsetY/SQUARE_SIZE;
     x = parseInt(x);
     y = parseInt(y);
     refreseMousePos(x,y);
@@ -39,8 +39,8 @@ canvas.addEventListener('mousemove', e => {
 
 canvas.addEventListener('click', e => {
     // TODOO(#1): Add Drag Mouse for Draw Mode
-    x = e.offsetX/squareSize;
-    y = e.offsetY/squareSize;
+    x = e.offsetX/SQUARE_SIZE;
+    y = e.offsetY/SQUARE_SIZE;
     x = parseInt(x);
     y = parseInt(y);
 
@@ -53,7 +53,7 @@ canvas.addEventListener('click', e => {
     printBoard(board);
 })
 
-var board = Array(width).fill(0).map(() => Array(height).fill(0));
+var board = Array(WIDTH).fill(0).map(() => Array(HEIGHT).fill(0));
 createBoard();
 board[0][1] = 1;
 board[1][1] = 1;
@@ -63,7 +63,7 @@ refreshMouseMode();
 
 fillButton.addEventListener('click', createBoard)
 clearButton.addEventListener('click', (e) => {
-    board = Array(width).fill(0).map(() => Array(height).fill(0));
+    board = Array(WIDTH).fill(0).map(() => Array(HEIGHT).fill(0));
     printBoard(board);
 })
 
@@ -124,26 +124,26 @@ function refreseMousePos(x, y){
 }
 
 function printBoard(board) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.WIDTH, canvas.HEIGHT);
     ctx.fillStyle = "rgb(0,0,0)";
     for(var y = 0; y < board.length; y ++){
         for(var x = 0; x < board.length; x++){
             if(board[y][x] == 1){
-                ctx.fillRect(x*squareSize,y*squareSize, squareSize, squareSize);        
+                ctx.fillRect(x*SQUARE_SIZE,y*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);        
             }
         }
     }
     ctx.fillStyle = "rgb(211,211,211)";
     for(var y = 0; y <= board.length; y ++){
-        ctx.fillRect(0,y*squareSize, board.length*squareSize, 5);
+        ctx.fillRect(0,y*SQUARE_SIZE, board.length*SQUARE_SIZE, 5);
         for(var x = 0; x <= board.length; x++){
-            ctx.fillRect(x*squareSize,0, 5, board.length*squareSize);
+            ctx.fillRect(x*SQUARE_SIZE,0, 5, board.length*SQUARE_SIZE);
         }
     }
 }
 
 function step(){
-    var tempBoard = Array(width).fill(0).map(() => Array(height).fill(0));
+    var tempBoard = Array(WIDTH).fill(0).map(() => Array(HEIGHT).fill(0));
     for(var y = 0; y < board.length; y++){
         for(var x = 0; x < board.length; x++){
             var aliveNeighbours = countAliveNeighbours(x,y);
