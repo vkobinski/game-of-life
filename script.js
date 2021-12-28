@@ -55,9 +55,6 @@ canvas.addEventListener('click', e => {
 
 var board = Array(WIDTH).fill(0).map(() => Array(HEIGHT).fill(0));
 createBoard();
-board[0][1] = 1;
-board[1][1] = 1;
-board[2][1] = 1;
 printBoard(board);
 refreshMouseMode();
 
@@ -73,6 +70,9 @@ function createBoard(){
             var random = Math.random() * (10 - 1) + 1;
             if(random > 5){
                 board[y][x] = 1;
+            }
+            else{
+                board[y][x] = 0;
             }
         }    
     }
@@ -124,7 +124,7 @@ function refreseMousePos(x, y){
 }
 
 function printBoard(board) {
-    ctx.clearRect(0, 0, canvas.WIDTH, canvas.HEIGHT);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "rgb(0,0,0)";
     for(var y = 0; y < board.length; y ++){
         for(var x = 0; x < board.length; x++){
